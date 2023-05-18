@@ -7,6 +7,7 @@ import AllToys from "../../components/Pages/AllToys";
 import MyToys from "../../components/Pages/MyToys";
 import AddToy from "../../components/Pages/AddToy";
 import Blogs from "../../components/Pages/Blogs";
+import UpdateProduct from "../../components/Pages/UpdateProduct";
 
 const routes = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const routes = createBrowserRouter([
       {
         path: "/blogs",
         element: <Blogs />,
+      },
+      {
+        path: "/UpdateProduct",
+        element: <UpdateProduct />,
       },
       {
         path: "/login",

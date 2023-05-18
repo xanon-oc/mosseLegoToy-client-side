@@ -3,7 +3,7 @@ import LazyLoad from "react-lazy-load";
 
 const GallerySection = () => {
   return (
-    <div className="mt-14">
+    <div className="mt-14 w-[79%] mx-auto">
       {/* this is the food gallery section */}
       <div>
         <h2 className="text-center mb-4 font-extrabold text-4xl">

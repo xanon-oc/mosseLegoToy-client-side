@@ -1,6 +1,6 @@
 import React from "react";
 import logo from "/moose.png";
-const AddToy = () => {
+const UpdateProduct = () => {
   return (
     <section className="bg-white">
       <div className="">
@@ -17,7 +17,7 @@ const AddToy = () => {
             </a>
 
             <h2 className="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
-              Add your product to Moose 🦑
+              Update your product to Moose 🦑
             </h2>
 
             <p className="mt-4 leading-relaxed text-white/90">
@@ -42,7 +42,7 @@ const AddToy = () => {
               </a>
 
               <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">
-                Add your product to Moose 🦑
+                Update your product to Moose 🦑
               </h1>
 
               <p className="mt-4 leading-relaxed text-gray-500">
@@ -161,4 +161,4 @@ const AddToy = () => {
   );
 };
 
-export default AddToy;
+export default UpdateProduct;

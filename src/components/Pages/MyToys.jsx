@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const MyToys = () => {
   return (
@@ -47,7 +48,9 @@ const MyToys = () => {
               </button>
             </th>
             <th className="w-10">
-              <button className="btn button-view w-7">Update</button>
+              <Link to="/UpdateProduct">
+                <button className="btn button-view w-7">Update</button>
+              </Link>
             </th>
           </tr>
         </tbody>
