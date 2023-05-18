@@ -1,21 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import icon from "/category.png";
 import icon2 from "/boxes.png";
 import icon3 from "/star.png";
-const SingleCard = ({ data }) => {
-  const {
-    _id,
-    pictureURL,
-    name,
-    sellerName,
-    sellerEmail,
-    subCategory,
-    price,
-    rating,
-    quantity,
-    description,
-  } = data;
-  console.log(_id);
+import SingleModal from "./SingleModal";
+const SingleCard = ({ data, handleSingleItem, singleData }) => {
+  const { _id, pictureURL, name, subCategory, price, rating, quantity } = data;
+
   return (
     <div className="block border-[1px] rounded-lg p-4 shadow-sm shadow-indigo-100">
       <img
@@ -23,7 +13,6 @@ const SingleCard = ({ data }) => {
         src={pictureURL}
         className="h-56 w-full rounded-md object-contain"
       />
-
       <div className="mt-2">
         <dl>
           <div>
@@ -72,8 +61,17 @@ const SingleCard = ({ data }) => {
         </div>
       </div>
       <div className="flex justify-center mt-10 mb-6">
-        <button className="button-view">View details</button>
+        {/* The button to open modal */}
+        <label
+          onClick={() => handleSingleItem(_id)}
+          htmlFor="my-modal-3"
+          className="btn button-view"
+        >
+          View details
+        </label>
       </div>
+
+      <SingleModal singleData={singleData} />
     </div>
   );
 };
