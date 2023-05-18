@@ -22,7 +22,6 @@ const TabSys = () => {
       .then((res) => res.json())
       .then((data) => setSingleData(data));
   };
-  console.log(singleData._id);
   return (
     <div>
       <Tabs className="flex flex-col justify-center items-center tabs tabs-boxed bg-inherit">

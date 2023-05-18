@@ -1,6 +1,18 @@
+import { Link, NavLink } from "react-router-dom";
 import logo from "/moose.png";
 import userLogo from "/user.png";
+import ThirdPartyLogin from "./ThirdPartyLogin";
+import { Tooltip } from "react-tooltip";
+import { useContext } from "react";
+import { AuthContext } from "../AuthProviders/AuthProvider";
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .then(() => {});
+  };
+  console.log(user);
   return (
     <div className="navbar bg-[aliceblue]">
       <div className="navbar-start">
@@ -26,19 +38,19 @@ const Navbar = () => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 uppercase"
           >
             <li>
-              <a>Home</a>
+              <NavLink to="/">Home</NavLink>
             </li>
             <li tabIndex={0}>
-              <a className="justify-between">All Toys</a>
+              <NavLink to="/allToys">All Toys</NavLink>
             </li>
             <li>
-              <a>My Toys</a>
+              <NavLink to="/myToys">My Toys</NavLink>
             </li>
             <li>
-              <a>Add a Toy</a>
+              <NavLink to="/addAToy">Add A Toy</NavLink>
             </li>
             <li>
-              <a>Blogs</a>
+              <NavLink to="/blogs">Blogs</NavLink>
             </li>
           </ul>
         </div>
@@ -49,60 +61,82 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 uppercase">
           <li>
-            <a>Home</a>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li tabIndex={0}>
-            <a>All Toys</a>
+            <NavLink to="/allToys">All Toys</NavLink>
           </li>
+          {user && (
+            <div className="flex">
+              <li>
+                <NavLink to="/myToys">My Toys</NavLink>
+              </li>
+              <li>
+                <NavLink to="/addAToy">Add A Toy</NavLink>
+              </li>
+            </div>
+          )}
           <li>
-            <a>My Toys</a>
-          </li>
-          <li>
-            <a>Add a Toy</a>
-          </li>
-          <li>
-            <a>Blogs</a>
+            <NavLink to="/blogs">Blogs</NavLink>
           </li>
         </ul>
       </div>
       <div className="navbar-end">
         <div className="flex">
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img src={userLogo} />
-              </div>
-            </label>
-            <ul
-              tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-60"
-            >
-              <button className="normal-signin">Sign in</button>
-              <div className="instruction-text">Don't have an Account?</div>
-              <button className="create-account">Create Account</button>
-              <div className="instruction-text">Or sign in with</div>
-            </ul>
-          </div>
-          <div>
+          {!user && (
             <div className="dropdown dropdown-end">
               <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full">
-                  <img src="https://img.freepik.com/free-photo/indoor-shot-beautiful-happy-african-american-woman-smiling-cheerfully-keeping-her-arms-folded-relaxing-indoors-after-morning-lectures-university_273609-1270.jpg?w=996&t=st=1684353631~exp=1684354231~hmac=3c5bb6490f3536bfc4ee0f1655784186acae672a4bde92274adb116447895c6e" />
+                  <img src={userLogo} />
                 </div>
               </label>
+
               <ul
                 tabIndex={0}
-                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-60"
               >
-                <li>
-                  <a className="justify-between">Profile</a>
-                </li>
-                <li>
-                  <a>Logout</a>
-                </li>
+                <Link to="/login">
+                  <button className="normal-signin">Sign in</button>
+                </Link>
+                <div className="instruction-text">Don't have an Account?</div>
+                <Link to="/register">
+                  <button className="create-account">Create Account</button>
+                </Link>
+                <div className="instruction-text mb-2">Or sign in with</div>
+                <div className="mb-4">
+                  <ThirdPartyLogin />
+                </div>
               </ul>
             </div>
-          </div>
+          )}
+
+          {user && (
+            <div>
+              <div className="dropdown dropdown-end">
+                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div
+                    data-tooltip-id="my-tooltip2"
+                    data-tooltip-content={user.displayName}
+                    className="w-10 rounded-full"
+                  >
+                    <img className="" src={user.photoURL} />
+                    <Tooltip place="left" id="my-tooltip2" />
+                  </div>
+                </label>
+                <ul
+                  tabIndex={0}
+                  className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+                >
+                  <li>
+                    <a className="justify-between">Profile</a>
+                  </li>
+                  <li>
+                    <button onClick={() => handleLogOut()}>Logout</button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -1,13 +1,39 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import icon from "/category.png";
 import icon2 from "/boxes.png";
 import icon3 from "/star.png";
 import SingleModal from "./SingleModal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from "../AuthProviders/AuthProvider";
 const SingleCard = ({ data, handleSingleItem, singleData }) => {
+  const { user } = useContext(AuthContext);
   const { _id, pictureURL, name, subCategory, price, rating, quantity } = data;
-
+  const notify = () =>
+    toast.warn("To view details you need to login !", {
+      position: "bottom-center",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   return (
     <div className="block border-[1px] rounded-lg p-4 shadow-sm shadow-indigo-100">
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <img
         alt="Home"
         src={pictureURL}
@@ -62,15 +88,20 @@ const SingleCard = ({ data, handleSingleItem, singleData }) => {
       </div>
       <div className="flex justify-center mt-10 mb-6">
         {/* The button to open modal */}
-        <label
-          onClick={() => handleSingleItem(_id)}
-          htmlFor="my-modal-3"
-          className="btn button-view"
-        >
-          View details
-        </label>
+        {user ? (
+          <label
+            onClick={() => handleSingleItem(_id)}
+            htmlFor="my-modal-3"
+            className="btn button-view"
+          >
+            View details
+          </label>
+        ) : (
+          <label onClick={() => notify()} className="btn button-view disabled">
+            View details
+          </label>
+        )}
       </div>
-
       <SingleModal singleData={singleData} />
     </div>
   );
