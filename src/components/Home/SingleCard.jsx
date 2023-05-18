@@ -6,11 +6,12 @@ import SingleModal from "./SingleModal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../AuthProviders/AuthProvider";
+import { Link } from "react-router-dom";
 const SingleCard = ({ data, handleSingleItem, singleData }) => {
   const { user } = useContext(AuthContext);
   const { _id, pictureURL, name, subCategory, price, rating, quantity } = data;
   const notify = () =>
-    toast.warn("To view details you need to login !", {
+    toast.warn("To view details you need to login !  Click me to Login 👈", {
       position: "bottom-center",
       autoClose: 5000,
       hideProgressBar: false,
@@ -22,18 +23,20 @@ const SingleCard = ({ data, handleSingleItem, singleData }) => {
     });
   return (
     <div className="block border-[1px] rounded-lg p-4 shadow-sm shadow-indigo-100">
-      <ToastContainer
-        position="bottom-center"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
+      <Link to="/login">
+        <ToastContainer
+          position="bottom-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
+      </Link>
       <img
         alt="Home"
         src={pictureURL}
