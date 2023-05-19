@@ -8,6 +8,7 @@ import MyToys from "../../components/Pages/MyToys";
 import AddToy from "../../components/Pages/AddToy";
 import Blogs from "../../components/Pages/Blogs";
 import UpdateProduct from "../../components/Pages/UpdateProduct";
+import SecureRoute from "./SecureRoute";
 
 const routes = createBrowserRouter([
   {
@@ -24,11 +25,19 @@ const routes = createBrowserRouter([
       },
       {
         path: "/myToys",
-        element: <MyToys />,
+        element: (
+          <SecureRoute>
+            <MyToys />
+          </SecureRoute>
+        ),
       },
       {
         path: "/addAToy",
-        element: <AddToy />,
+        element: (
+          <SecureRoute>
+            <AddToy />
+          </SecureRoute>
+        ),
       },
       {
         path: "/blogs",
@@ -36,7 +45,11 @@ const routes = createBrowserRouter([
       },
       {
         path: "/UpdateProduct",
-        element: <UpdateProduct />,
+        element: (
+          <SecureRoute>
+            <UpdateProduct />
+          </SecureRoute>
+        ),
       },
       {
         path: "/login",

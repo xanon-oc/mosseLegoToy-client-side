@@ -6,7 +6,6 @@ import icon3 from "/star.png";
 import icon4 from "/seller.png";
 import icon5 from "/gmail.png";
 const SingleModal = ({ singleData }) => {
-  console.log(singleData.name);
   return (
     <div>
       <input type="checkbox" id="my-modal-3" className="modal-toggle" />

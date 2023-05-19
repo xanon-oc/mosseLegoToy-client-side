@@ -12,7 +12,6 @@ const Navbar = () => {
       .then(() => {})
       .then(() => {});
   };
-  console.log(user);
   return (
     <div className="navbar bg-[aliceblue]">
       <div className="navbar-start">
