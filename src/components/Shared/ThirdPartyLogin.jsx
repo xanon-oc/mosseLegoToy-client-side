@@ -10,6 +10,7 @@ const ThirdPartyLogin = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const navigate = useNavigate();
+
   const signInWithGoogle = () => {
     // sign in and sign up handler
     handleGoogleSignIn()

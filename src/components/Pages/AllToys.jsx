@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import SingleModal from "../Home/SingleModal";
 import TableRow from "../Home/TableRow";
 import logo from "/moose.png";
-import { useNavigation } from "react-router-dom";
 const AllToys = () => {
   const [allData, setAllData] = useState([]);
   const [singleData, setSingleData] = useState([]);
-  const navigation = useNavigation();
+
   useEffect(() => {
     fetch(`http://localhost:5000/all-products/""`)
       .then((res) => res.json())

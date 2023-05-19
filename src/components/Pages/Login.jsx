@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProviders/AuthProvider";
 import ThirdPartyLogin from "../Shared/ThirdPartyLogin";
 
@@ -11,6 +11,8 @@ const Login = () => {
   const [success, setSuccess] = useState("");
   // hooks
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const handleLogin = (event) => {
     // form
     event.preventDefault();
@@ -23,7 +25,7 @@ const Login = () => {
         const loggedUser = result.user;
         console.log(loggedUser);
         setUser(loggedUser);
-        navigate("/");
+        navigate(from, { replace: true });
         setError("");
         setSuccess("Account login successful");
         form.reset();

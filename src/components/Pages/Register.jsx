@@ -1,5 +1,10 @@
 import { useContext, useState } from "react";
-import { Link, useNavigate, useNavigation } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useNavigation,
+} from "react-router-dom";
 import { getAuth, updateProfile } from "firebase/auth";
 import { AuthContext } from "../AuthProviders/AuthProvider";
 import ThirdPartyLogin from "../Shared/ThirdPartyLogin";
@@ -11,6 +16,8 @@ const Register = () => {
   const [success, setSuccess] = useState("");
   const navigate = useNavigate();
   const navigation = useNavigation();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const handleRegister = (event) => {
     setError("");

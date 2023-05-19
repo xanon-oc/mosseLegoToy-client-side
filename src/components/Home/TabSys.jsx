@@ -32,9 +32,9 @@ const TabSys = () => {
   return (
     <div>
       <h2>{navigation.state}</h2>
-      <Tabs className="flex flex-col justify-center items-center tabs tabs-boxed bg-inherit">
+      <Tabs className="flex flex-col justify-center items-center tabs tabs-boxed  bg-inherit">
         <div className="mb-8">
-          <TabList className="no-underline">
+          <TabList className="">
             <Tab onClick={() => handleTabClick("Home")} className="tab">
               All Lego Toys
             </Tab>

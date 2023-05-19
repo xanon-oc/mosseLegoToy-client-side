@@ -13,7 +13,7 @@ const Navbar = () => {
       .then(() => {});
   };
   return (
-    <div className="navbar bg-[aliceblue]">
+    <div className="navbar bg-[aliceblue] lg:bg-opacity-0">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -32,6 +32,7 @@ const Navbar = () => {
               />
             </svg>
           </label>
+
           <ul
             tabIndex={0}
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 uppercase"
@@ -54,11 +55,13 @@ const Navbar = () => {
           </ul>
         </div>
         <div>
-          <img src={logo} className="w-24" alt="logo" />
+          <Link to="/">
+            <img src={logo} className="w-24" alt="logo" />
+          </Link>
         </div>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 uppercase">
+        <ul className="menu menu-horizontal px-1 gap-6 btn  uppercase font-semibold">
           <li>
             <NavLink to="/">Home</NavLink>
           </li>
