@@ -1,6 +1,6 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
-const TableRow = ({ data, index, handleSingleItem }) => {
+const MyToysTableRow = ({ data, index, handleDelete }) => {
   const {
     _id,
     pictureURL,
@@ -40,17 +40,21 @@ const TableRow = ({ data, index, handleSingleItem }) => {
         <span className="badge badge-ghost badge-sm">Stock - {quantity}</span>
       </td>
 
-      <th className="w-10">
-        <label
-          onClick={() => handleSingleItem(_id)}
-          htmlFor="my-modal-3"
-          className="btn button-view"
+      <th>
+        <button
+          onClick={() => handleDelete(data._id)}
+          className="btn button-view hover:bg-red-500 w-7"
         >
-          details
-        </label>
+          Delete
+        </button>
+      </th>
+      <th className="w-10">
+        <Link to={`/UpdateProduct/${_id}`}>
+          <button className="btn button-view w-7">Update</button>
+        </Link>
       </th>
     </tr>
   );
 };
 
-export default TableRow;
+export default MyToysTableRow;

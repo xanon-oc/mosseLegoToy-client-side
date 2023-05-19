@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import SingleCard from "./SingleCard";
+import { useNavigation } from "react-router-dom";
 const TabSys = () => {
   const [allData, setAllData] = useState([]);
   const [singleData, setSingleData] = useState([]);
   const [activeTab, setActiveTab] = useState("Home");
+  const navigation = useNavigation();
   useEffect(() => {
     fetch(`http://localhost:5000/all-products/${activeTab}`)
       .then((res) => res.json())
@@ -29,6 +31,7 @@ const TabSys = () => {
 
   return (
     <div>
+      <h2>{navigation.state}</h2>
       <Tabs className="flex flex-col justify-center items-center tabs tabs-boxed bg-inherit">
         <div className="mb-8">
           <TabList className="no-underline">

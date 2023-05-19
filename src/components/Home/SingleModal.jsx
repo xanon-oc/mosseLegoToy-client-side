@@ -1,5 +1,3 @@
-import React from "react";
-import { useParams } from "react-router-dom";
 import icon from "/category.png";
 import icon2 from "/boxes.png";
 import icon3 from "/star.png";
@@ -21,7 +19,7 @@ const SingleModal = ({ singleData }) => {
           <div className="grid md:grid-cols-2 lg:grid-cols-2">
             <div>
               <img
-                className="object-contain border-[1px] p-8 rounded-lg"
+                className="object-contain border-[1px] p-8 rounded-lg shadow-sm"
                 src={singleData.pictureURL}
                 alt="Album"
               />

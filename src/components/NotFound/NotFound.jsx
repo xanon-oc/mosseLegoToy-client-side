@@ -1,9 +1,9 @@
-import React from "react";
-
+import Lottie from "lottie-react";
+import Error from "../../assets/404-error.json";
 const NotFound = () => {
   return (
     <div>
-      <h2>This is the error page</h2>
+      <Lottie animationData={Error} loop={true} />
     </div>
   );
 };

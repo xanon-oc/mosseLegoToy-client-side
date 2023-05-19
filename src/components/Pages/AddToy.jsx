@@ -1,6 +1,46 @@
-import React from "react";
+import { useContext } from "react";
 import logo from "/moose.png";
+import { AuthContext } from "../AuthProviders/AuthProvider";
 const AddToy = () => {
+  const { user } = useContext(AuthContext);
+  const handleFormData = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const subCategory = form.category.value;
+    const price = form.price.value;
+    const rating = form.ratings.value;
+    const sellerName = form.sellerName.value;
+    const sellerEmail = form.sellerEmail.value;
+    const pictureURL = form.photoURL.value;
+    const quantity = form.quantity.value;
+    const description = form.description.value;
+
+    const updatedData = {
+      name,
+      price,
+      quantity,
+      rating,
+      sellerName,
+      subCategory,
+      description,
+      sellerEmail,
+      pictureURL,
+    };
+    console.log(updatedData);
+    fetch("http://localhost:5000/postProduct", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        alert("Product added done");
+        console.log(data);
+      });
+  };
   return (
     <section className="bg-white">
       <div className="">
@@ -51,7 +91,10 @@ const AddToy = () => {
               </p>
             </div>
 
-            <form action="#" className="mt-8 grid grid-cols-4 gap-6">
+            <form
+              onSubmit={handleFormData}
+              className="mt-8 grid grid-cols-4 gap-6"
+            >
               <div className="col-span-6 sm:col-span-3">
                 <label className="block text-sm font-medium text-gray-700">
                   Product Name
@@ -60,7 +103,7 @@ const AddToy = () => {
                 <input
                   type="text"
                   name="name"
-                  className="mt-1 w-full h-11 rounded-md   border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  className="mt-1 w-full h-11 p-2  rounded-md   border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 />
               </div>
               <div className="col-span-6 sm:col-span-3">
@@ -68,7 +111,7 @@ const AddToy = () => {
                   Category
                 </label>
 
-                <select className="select select-bordered">
+                <select name="category" className="select select-bordered">
                   <option disabled selected>
                     Pick one
                   </option>
@@ -86,7 +129,7 @@ const AddToy = () => {
                 <input
                   type="text"
                   name="price"
-                  className="mt-1 h-11 w-full rounded-md border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  className="mt-1 h-11 p-2  w-full rounded-md border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 />
               </div>
               <div className="col-span-6 sm:col-span-3">
@@ -97,7 +140,7 @@ const AddToy = () => {
                 <input
                   type="text"
                   name="ratings"
-                  className="mt-1 h-11 w-full rounded-md border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  className="mt-1 h-11 p-2  w-full rounded-md border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 />
               </div>
               <div className="col-span-6">
@@ -108,7 +151,7 @@ const AddToy = () => {
                 <input
                   type="text"
                   name="sellerName"
-                  className="mt-1 h-11 w-full rounded-md border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  className="mt-1 h-11 p-2  w-full rounded-md border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 />
               </div>
               <div className="col-span-6">
@@ -119,7 +162,9 @@ const AddToy = () => {
                 <input
                   type="email"
                   name="sellerEmail"
-                  className="mt-1 h-11 w-full rounded-md border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  readOnly
+                  defaultValue={user?.email}
+                  className="mt-1 h-11 p-2  w-full rounded-md border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 />
               </div>
               <div className="col-span-6">
@@ -130,7 +175,7 @@ const AddToy = () => {
                 <input
                   type="text"
                   name="quantity"
-                  className="mt-1 h-11 w-full rounded-md border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  className="mt-1 h-11 p-2  w-full rounded-md border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 />
               </div>
               <div className="col-span-6">
@@ -141,11 +186,12 @@ const AddToy = () => {
                 <input
                   type="url"
                   name="photoURL"
-                  className="mt-1 h-11 w-full rounded-md border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  className="mt-1 h-11 p-2  w-full rounded-md border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 />
               </div>
               <div className="col-span-6">
                 <textarea
+                  name="description"
                   placeholder="Description"
                   className="textarea textarea-bordered textarea-lg w-full max-w-5xl"
                 ></textarea>

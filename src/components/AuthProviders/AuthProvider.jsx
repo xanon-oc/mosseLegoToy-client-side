@@ -90,6 +90,7 @@ const AuthProvider = ({ children }) => {
     handleGitHubSignIn,
     logOut,
     setUser,
+    loading,
     createUser,
     signIn,
     emailSendToV,

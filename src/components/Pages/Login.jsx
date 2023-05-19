@@ -21,6 +21,7 @@ const Login = () => {
     signIn(email, password)
       .then((result) => {
         const loggedUser = result.user;
+        console.log(loggedUser);
         setUser(loggedUser);
         navigate("/");
         setError("");

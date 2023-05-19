@@ -1,6 +1,48 @@
-import React from "react";
+import { useLoaderData } from "react-router-dom";
 import logo from "/moose.png";
+import { useContext } from "react";
+import { AuthContext } from "../AuthProviders/AuthProvider";
 const UpdateProduct = () => {
+  const data = useLoaderData();
+  const { user } = useContext(AuthContext);
+  const handleFormData = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const subCategory = form.category.value;
+    const price = form.price.value;
+    const rating = form.ratings.value;
+    const sellerName = form.sellerName.value;
+    const sellerEmail = form.sellerEmail.value;
+    const pictureURL = form.photoURL.value;
+    const quantity = form.quantity.value;
+    const description = form.description.value;
+
+    const updatedData = {
+      name,
+      price,
+      quantity,
+      rating,
+      sellerName,
+      subCategory,
+      description,
+      sellerEmail,
+      pictureURL,
+    };
+    console.log(updatedData);
+    fetch(`http://localhost:5000/update-product/${data._id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(updatedData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        alert("Data Updated");
+        console.log(data);
+      });
+  };
   return (
     <section className="bg-white">
       <div className="">
@@ -32,7 +74,7 @@ const UpdateProduct = () => {
           className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6"
         >
           <div className="max-w-xl lg:max-w-3xl">
-            <div className="relative -mt-16 block lg:hidden">
+            <div className="relative -mt-1 p-26 block lg:hidden">
               <a
                 className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-white text-blue-600 sm:h-20 sm:w-20"
                 href="/"
@@ -51,7 +93,10 @@ const UpdateProduct = () => {
               </p>
             </div>
 
-            <form action="#" className="mt-8 grid grid-cols-4 gap-6">
+            <form
+              onSubmit={handleFormData}
+              className="mt-8 grid grid-cols-4 gap-6"
+            >
               <div className="col-span-6 sm:col-span-3">
                 <label className="block text-sm font-medium text-gray-700">
                   Product Name
@@ -60,7 +105,8 @@ const UpdateProduct = () => {
                 <input
                   type="text"
                   name="name"
-                  className="mt-1 w-full h-11 rounded-md   border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  defaultValue={data.name}
+                  className="mt-1 w-full h-11 p-2  rounded-md   border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 />
               </div>
               <div className="col-span-6 sm:col-span-3">
@@ -68,7 +114,11 @@ const UpdateProduct = () => {
                   Category
                 </label>
 
-                <select className="select select-bordered">
+                <select
+                  name="category"
+                  defaultValue={data.subCategory}
+                  className="select select-bordered"
+                >
                   <option disabled selected>
                     Pick one
                   </option>
@@ -86,7 +136,8 @@ const UpdateProduct = () => {
                 <input
                   type="text"
                   name="price"
-                  className="mt-1 h-11 w-full rounded-md border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  defaultValue={data.price}
+                  className="mt-1 h-11 p-2  w-full rounded-md border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 />
               </div>
               <div className="col-span-6 sm:col-span-3">
@@ -97,7 +148,8 @@ const UpdateProduct = () => {
                 <input
                   type="text"
                   name="ratings"
-                  className="mt-1 h-11 w-full rounded-md border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  defaultValue={data.rating}
+                  className="mt-1 h-11 p-2  w-full rounded-md border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 />
               </div>
               <div className="col-span-6">
@@ -108,7 +160,8 @@ const UpdateProduct = () => {
                 <input
                   type="text"
                   name="sellerName"
-                  className="mt-1 h-11 w-full rounded-md border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  defaultValue={data.sellerName}
+                  className="mt-1 h-11 p-2  w-full rounded-md border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 />
               </div>
               <div className="col-span-6">
@@ -119,7 +172,9 @@ const UpdateProduct = () => {
                 <input
                   type="email"
                   name="sellerEmail"
-                  className="mt-1 h-11 w-full rounded-md border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  readOnly
+                  defaultValue={user?.email}
+                  className="mt-1 h-11 p-2  w-full rounded-md border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 />
               </div>
               <div className="col-span-6">
@@ -130,7 +185,8 @@ const UpdateProduct = () => {
                 <input
                   type="text"
                   name="quantity"
-                  className="mt-1 h-11 w-full rounded-md border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  defaultValue={data.quantity}
+                  className="mt-1 h-11 p-2  w-full rounded-md border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 />
               </div>
               <div className="col-span-6">
@@ -141,17 +197,20 @@ const UpdateProduct = () => {
                 <input
                   type="url"
                   name="photoURL"
-                  className="mt-1 h-11 w-full rounded-md border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  defaultValue={data.pictureURL}
+                  className="mt-1 h-11 p-2  w-full rounded-md border-[1px] border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                 />
               </div>
               <div className="col-span-6">
                 <textarea
+                  name="description"
+                  defaultValue={data.description}
                   placeholder="Description"
                   className="textarea textarea-bordered textarea-lg w-full max-w-5xl"
                 ></textarea>
               </div>
               <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-                <button className="sign-in_btn">Create an Product</button>
+                <button className="sign-in_btn">Update Product</button>
               </div>
             </form>
           </div>

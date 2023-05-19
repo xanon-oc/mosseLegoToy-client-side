@@ -9,11 +9,13 @@ import AddToy from "../../components/Pages/AddToy";
 import Blogs from "../../components/Pages/Blogs";
 import UpdateProduct from "../../components/Pages/UpdateProduct";
 import SecureRoute from "./SecureRoute";
+import NotFound from "../../components/NotFound/NotFound";
 
 const routes = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement: <NotFound />,
     children: [
       {
         path: "/",
@@ -44,12 +46,14 @@ const routes = createBrowserRouter([
         element: <Blogs />,
       },
       {
-        path: "/UpdateProduct",
+        path: "/UpdateProduct/:id",
         element: (
           <SecureRoute>
             <UpdateProduct />
           </SecureRoute>
         ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/single-product/${params.id}`),
       },
       {
         path: "/login",
