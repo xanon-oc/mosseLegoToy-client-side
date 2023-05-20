@@ -10,17 +10,18 @@ const Main = () => {
       <div className="sticky top-0 z-50">
         <Navbar />
       </div>
-      {navigation.state === "loading" ? (
-        <div className="flex justify-center items-center h-screen">
-          <div className="loader">
-            <span className="loader-text">loading</span>
-            <span className="load"></span>
+      <div className="top-0">
+        {navigation.state === "loading" ? (
+          <div className="flex justify-center items-center h-screen">
+            <div className="loader">
+              <span className="loader-text">loading</span>
+              <span className="load"></span>
+            </div>
           </div>
-        </div>
-      ) : (
-        <Outlet />
-      )}
-
+        ) : (
+          <Outlet />
+        )}
+      </div>
       <div className="divider w-[90%] mt-8 mb-8 mx-auto"></div>
       <Footer />
     </div>

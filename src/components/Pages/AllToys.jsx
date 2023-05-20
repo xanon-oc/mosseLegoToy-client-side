@@ -5,6 +5,7 @@ import logo from "/moose.png";
 const AllToys = () => {
   const [allData, setAllData] = useState([]);
   const [singleData, setSingleData] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     fetch(`http://localhost:5000/all-products/""`)
@@ -21,6 +22,14 @@ const AllToys = () => {
     })
       .then((res) => res.json())
       .then((data) => setSingleData(data));
+  };
+  const handleSearch = (e) => {
+    fetch(`http://localhost:5000/search/${searchValue}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setAllData(data);
+        console.log(data);
+      });
   };
   return (
     <div>
@@ -70,11 +79,12 @@ const AllToys = () => {
         <div className="form-control mt-8">
           <div className="input-group">
             <input
+              onChange={(e) => setSearchValue(e.target.value)}
               type="text"
               placeholder="Search…"
               className="input input-bordered w-96"
             />
-            <button className="btn btn-square">
+            <button onClick={handleSearch} className="btn btn-square">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"

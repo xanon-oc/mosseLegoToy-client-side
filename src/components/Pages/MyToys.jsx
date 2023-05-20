@@ -5,7 +5,7 @@ import { AuthContext } from "../AuthProviders/AuthProvider";
 import Lottie from "lottie-react";
 import NoData from "../../assets/NoData.json";
 import { useNavigation } from "react-router-dom";
-
+import Swal from "sweetalert2";
 const MyToys = () => {
   const { user } = useContext(AuthContext);
   const [specificData, setSpecificData] = useState([]);
@@ -20,18 +20,30 @@ const MyToys = () => {
   }, [user]);
   console.log(user);
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/deleteProduct/${id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        alert("Deleted");
-        const updatedProducts = specificData.filter(
-          (product) => product._id !== id
-        );
-        setSpecificData(updatedProducts);
-        console.log(data);
-      });
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/deleteProduct/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            const updatedProducts = specificData.filter(
+              (product) => product._id !== id
+            );
+            setSpecificData(updatedProducts);
+            console.log(data);
+          });
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
   };
   return (
     <div>

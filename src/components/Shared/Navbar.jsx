@@ -55,8 +55,9 @@ const Navbar = () => {
           </ul>
         </div>
         <div>
-          <Link to="/">
-            <img src={logo} className="w-24" alt="logo" />
+          <Link className="flex items-center font-bold button-view " to="/">
+            <img src={logo} className="w-10" alt="logo" />
+            <p> moose</p>
           </Link>
         </div>
       </div>
@@ -113,15 +114,15 @@ const Navbar = () => {
           )}
 
           {user && (
-            <div>
+            <div className="">
               <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div
                     data-tooltip-id="my-tooltip2"
                     data-tooltip-content={user.displayName}
-                    className="w-10 rounded-full"
+                    className="w-10 rounded-full "
                   >
-                    <img className="" src={user.photoURL} />
+                    <img className="w-10" src={user.photoURL} />
                     <Tooltip place="left" id="my-tooltip2" />
                   </div>
                 </label>
