@@ -3,6 +3,7 @@ import logo from "/moose.png";
 import { useContext } from "react";
 import { AuthContext } from "../AuthProviders/AuthProvider";
 import useTitle from "../../Hooks/useTitle";
+import toast, { Toaster } from "react-hot-toast";
 const UpdateProduct = () => {
   const data = useLoaderData();
   const { user } = useContext(AuthContext);
@@ -32,6 +33,7 @@ const UpdateProduct = () => {
       pictureURL,
     };
     console.log(updatedData);
+    const notify = () => toast.success("Product update successful!");
     fetch(`http://localhost:5000/update-product/${data._id}`, {
       method: "PATCH",
       headers: {
@@ -41,12 +43,13 @@ const UpdateProduct = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        alert("Data Updated");
+        notify();
         console.log(data);
       });
   };
   return (
     <section className="bg-white">
+      <Toaster position="bottom-center" reverseOrder={false} />
       <div className="">
         <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
           <img

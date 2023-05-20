@@ -10,10 +10,11 @@ import useTitle from "../../Hooks/useTitle";
 const MyToys = () => {
   const { user } = useContext(AuthContext);
   const [specificData, setSpecificData] = useState([]);
-  const navigation = useNavigation();
   useTitle(" my toys");
   useEffect(() => {
-    fetch(`http://localhost:5000/user-products?email=${user?.email}`)
+    fetch(
+      `https://moose-lego-toys-server-xanon-oc.vercel.app/user-products?email=${user?.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setSpecificData(data);
@@ -43,7 +44,7 @@ const MyToys = () => {
             setSpecificData(updatedProducts);
             console.log(data);
           });
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+        Swal.fire("Deleted!", "Your product has been deleted.", "success");
       }
     });
   };

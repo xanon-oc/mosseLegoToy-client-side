@@ -6,10 +6,9 @@ const GallerySection = () => {
     <div className="mt-14 w-[79%] mx-auto">
       {/* this is the food gallery section */}
       <div>
-        <h2 className="text-center mb-4 font-extrabold text-4xl">
-          Recent Photoshoots
-        </h2>
-        <p className="text-center text-2xl font-semibold  text-[#72BFDC] mb-14">
+        <h2 className="text-xl font-bold sm:text-2xl"> Recent Photo Shoots</h2>
+
+        <p className="text-xl font-bold sm:text-2xl  text-[#72BFDC] mb-10">
           <small>Check Gallery</small>
         </p>
       </div>

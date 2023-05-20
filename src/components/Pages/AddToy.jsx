@@ -2,6 +2,7 @@ import { useContext } from "react";
 import logo from "/moose.png";
 import { AuthContext } from "../AuthProviders/AuthProvider";
 import useTitle from "../../Hooks/useTitle";
+import toast, { Toaster } from "react-hot-toast";
 const AddToy = () => {
   const { user } = useContext(AuthContext);
   useTitle(" add a toy");
@@ -29,8 +30,9 @@ const AddToy = () => {
       sellerEmail,
       pictureURL,
     };
+    const notify = () => toast.success("Product added successful!");
     console.log(updatedData);
-    fetch("http://localhost:5000/postProduct", {
+    fetch("https://moose-lego-toys-server-xanon-oc.vercel.app/postProduct", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -39,12 +41,14 @@ const AddToy = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        alert("Product added done");
+        notify();
         console.log(data);
       });
   };
+
   return (
     <section className="bg-white">
+      <Toaster position="bottom-center" reverseOrder={false} />
       <div className="">
         <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
           <img
