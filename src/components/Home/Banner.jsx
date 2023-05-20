@@ -65,7 +65,7 @@ const Banner = () => {
           </div>
         </Swiper>
       </div>
-      <div className="absolute flex items-center h-full gap-5  left-0  bottom-0  z-40 text-white">
+      <div className="absolute bottom-0 bg-gradient-to-r from-[#151515] to-[rgba(45, 25, 41, 0)]  flex items-center h-full gap-5  left-0  bottom-0  z-40 text-white">
         <div className="ml-[15%] mt-[100%]">
           <h1 className="text-4xl">One Box Toy</h1>
           <p className="text-xl">Flat 10% Off On Order Above $29.99</p>

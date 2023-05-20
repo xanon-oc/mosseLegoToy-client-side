@@ -32,7 +32,7 @@ const AddToy = () => {
     };
     const notify = () => toast.success("Product added successful!");
     console.log(updatedData);
-    fetch("https://moose-lego-toys-server-xanon-oc.vercel.app/postProduct", {
+    fetch("http://localhost:5000/postProduct", {
       method: "POST",
       headers: {
         "content-type": "application/json",

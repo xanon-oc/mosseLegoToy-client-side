@@ -10,17 +10,18 @@ import useTitle from "../../Hooks/useTitle";
 const MyToys = () => {
   const { user } = useContext(AuthContext);
   const [specificData, setSpecificData] = useState([]);
+  const [filterPrice, setFilterPrice] = useState("-1");
   useTitle(" my toys");
   useEffect(() => {
     fetch(
-      `https://moose-lego-toys-server-xanon-oc.vercel.app/user-products?email=${user?.email}`
+      `http://localhost:5000/user-products?email=${user?.email}&sort=${filterPrice}`
     )
       .then((res) => res.json())
       .then((data) => {
         setSpecificData(data);
         console.log(data);
       });
-  }, [user]);
+  }, [user, filterPrice]);
   console.log(user);
   const handleDelete = (id) => {
     Swal.fire({
@@ -47,6 +48,10 @@ const MyToys = () => {
         Swal.fire("Deleted!", "Your product has been deleted.", "success");
       }
     });
+  };
+  const handleClick = (tabName) => {
+    setFilterPrice(tabName);
+    console.log(tabName);
   };
   return (
     <div>
@@ -92,6 +97,32 @@ const MyToys = () => {
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                 Eligendi nam dolorum aliquam, quibusdam aperiam voluptatum.
               </p>
+            </div>
+            <div className="mt-8 flex justify-center gap-4">
+              <button
+                className="btn btn-circle"
+                onClick={() => handleClick("-1")}
+              >
+                D
+              </button>
+              <button
+                className="btn btn-circle"
+                onClick={() => handleClick("1")}
+              >
+                A
+              </button>
+
+              {/* <select className="select w-full max-w-xs">
+                <option disabled selected>
+                  Pick your sort system
+                </option>
+                <option onClick={() => handleClick("-1")}>
+                  Sort by descending price{" "}
+                </option>
+                <option onClick={() => handleClick("1")}>
+                  Sort by ascending price
+                </option>
+              </select> */}
             </div>
             <div className="overflow-x-auto shadow-xl w-10/12 mx-auto mt-10">
               <table className="table w-full">

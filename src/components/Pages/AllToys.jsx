@@ -16,26 +16,23 @@ const AllToys = () => {
     return navigate("/login");
   };
   useEffect(() => {
-    fetch(`https://moose-lego-toys-server-xanon-oc.vercel.app/all-products/""`)
+    fetch(`http://localhost:5000/all-products/""`)
       .then((res) => res.json())
       .then((data) => setAllData(data));
   }, []);
   const handleSingleItem = (id) => {
     console.log(id);
-    fetch(
-      `https://moose-lego-toys-server-xanon-oc.vercel.app/single-product/${id}`,
-      {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-        },
-      }
-    )
+    fetch(`http://localhost:5000/single-product/${id}`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+      },
+    })
       .then((res) => res.json())
       .then((data) => setSingleData(data));
   };
   const handleSearch = (e) => {
-    fetch(`https://moose-lego-toys-server-xanon-oc.vercel.app/${searchValue}`)
+    fetch(`http://localhost:5000/search/${searchValue}`)
       .then((res) => res.json())
       .then((data) => {
         setAllData(data);
