@@ -1,8 +1,10 @@
 import { useContext } from "react";
 import logo from "/moose.png";
 import { AuthContext } from "../AuthProviders/AuthProvider";
+import useTitle from "../../Hooks/useTitle";
 const AddToy = () => {
   const { user } = useContext(AuthContext);
+  useTitle(" add a toy");
   const handleFormData = (e) => {
     e.preventDefault();
     const form = e.target;

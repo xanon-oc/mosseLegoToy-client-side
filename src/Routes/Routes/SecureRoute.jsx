@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../components/AuthProviders/AuthProvider";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import Loader from "../../assets/Loader.json";
 const SecureRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const location = useLocation();
 
   if (loading) {
     return (
@@ -19,7 +19,7 @@ const SecureRoute = ({ children }) => {
   if (user) {
     return children;
   }
-  return navigate("/login");
+  return <Navigate state={{ from: location }} to="/login" replace></Navigate>;
 };
 
 export default SecureRoute;

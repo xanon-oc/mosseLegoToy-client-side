@@ -6,10 +6,12 @@ import Lottie from "lottie-react";
 import NoData from "../../assets/NoData.json";
 import { useNavigation } from "react-router-dom";
 import Swal from "sweetalert2";
+import useTitle from "../../Hooks/useTitle";
 const MyToys = () => {
   const { user } = useContext(AuthContext);
   const [specificData, setSpecificData] = useState([]);
   const navigation = useNavigation();
+  useTitle(" my toys");
   useEffect(() => {
     fetch(`http://localhost:5000/user-products?email=${user?.email}`)
       .then((res) => res.json())

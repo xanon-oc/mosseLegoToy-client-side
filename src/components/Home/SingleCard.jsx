@@ -1,42 +1,20 @@
-import React, { useContext, useState } from "react";
+import { useContext } from "react";
 import icon from "/category.png";
 import icon2 from "/boxes.png";
 import icon3 from "/star.png";
 import SingleModal from "./SingleModal";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../AuthProviders/AuthProvider";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 const SingleCard = ({ data, handleSingleItem, singleData }) => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   const { _id, pictureURL, name, subCategory, price, rating, quantity } = data;
-  const notify = () =>
-    toast.warn("To view details you need to login !  Click me to Login 👈", {
-      position: "bottom-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
+  const handleNavigate = () => {
+    return navigate("/login");
+  };
   return (
     <div className="block border-[1px] rounded-lg p-4 shadow-sm shadow-indigo-100">
-      <Link to="/login">
-        <ToastContainer
-          position="bottom-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
-      </Link>
       <img
         alt="Home"
         src={pictureURL}
@@ -100,8 +78,11 @@ const SingleCard = ({ data, handleSingleItem, singleData }) => {
             View details
           </label>
         ) : (
-          <label onClick={() => notify()} className="btn button-view disabled">
-            View details
+          <label
+            onClick={() => handleNavigate()}
+            className="btn button-view disabled"
+          >
+            Login to View details
           </label>
         )}
       </div>

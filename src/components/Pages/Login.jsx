@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProviders/AuthProvider";
 import ThirdPartyLogin from "../Shared/ThirdPartyLogin";
+import useTitle from "../../Hooks/useTitle";
 
 const Login = () => {
   // states
@@ -12,6 +13,7 @@ const Login = () => {
   // hooks
   const navigate = useNavigate();
   const location = useLocation();
+  useTitle(" sign in");
   const from = location.state?.from?.pathname || "/";
   const handleLogin = (event) => {
     // form

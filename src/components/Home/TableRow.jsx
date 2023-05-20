@@ -1,9 +1,6 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../AuthProviders/AuthProvider";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { Link } from "react-router-dom";
-const TableRow = ({ data, index, handleSingleItem }) => {
+const TableRow = ({ data, index, handleSingleItem, handleNavigate }) => {
   const { user } = useContext(AuthContext);
   const {
     _id,
@@ -15,17 +12,7 @@ const TableRow = ({ data, index, handleSingleItem }) => {
     sellerName,
     sellerEmail,
   } = data;
-  const notify = () =>
-    toast.warn("Login Required ! Tap Login 👈", {
-      position: "bottom-center",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
+
   return (
     <tr>
       <td>
@@ -56,20 +43,6 @@ const TableRow = ({ data, index, handleSingleItem }) => {
       </td>
 
       <th className="">
-        <Link to="/login">
-          <ToastContainer
-            position="bottom-center"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-          />
-        </Link>
         {user ? (
           <label
             onClick={() => handleSingleItem(_id)}
@@ -79,8 +52,11 @@ const TableRow = ({ data, index, handleSingleItem }) => {
             View details
           </label>
         ) : (
-          <label onClick={() => notify()} className="btn button-view disabled">
-            View details
+          <label
+            onClick={() => handleNavigate()}
+            className="btn button-view disabled"
+          >
+            Login to View details
           </label>
         )}
       </th>

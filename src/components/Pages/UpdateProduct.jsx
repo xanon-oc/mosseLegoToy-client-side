@@ -2,9 +2,11 @@ import { useLoaderData } from "react-router-dom";
 import logo from "/moose.png";
 import { useContext } from "react";
 import { AuthContext } from "../AuthProviders/AuthProvider";
+import useTitle from "../../Hooks/useTitle";
 const UpdateProduct = () => {
   const data = useLoaderData();
   const { user } = useContext(AuthContext);
+  useTitle(" update product");
   const handleFormData = (e) => {
     e.preventDefault();
     const form = e.target;

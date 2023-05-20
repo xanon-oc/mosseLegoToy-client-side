@@ -2,11 +2,19 @@ import { useEffect, useState } from "react";
 import SingleModal from "../Home/SingleModal";
 import TableRow from "../Home/TableRow";
 import logo from "/moose.png";
+import { useLocation, useNavigate } from "react-router-dom";
+import useTitle from "../../Hooks/useTitle";
 const AllToys = () => {
   const [allData, setAllData] = useState([]);
   const [singleData, setSingleData] = useState([]);
   const [searchValue, setSearchValue] = useState("");
-
+  const location = useLocation();
+  console.log(location);
+  const navigate = useNavigate();
+  useTitle(" all toys");
+  const handleNavigate = () => {
+    return navigate("/login");
+  };
   useEffect(() => {
     fetch(`http://localhost:5000/all-products/""`)
       .then((res) => res.json())
@@ -127,6 +135,7 @@ const AllToys = () => {
                 key={data._id}
                 data={data}
                 handleSingleItem={handleSingleItem}
+                handleNavigate={handleNavigate}
                 index={index}
               />
             ))}

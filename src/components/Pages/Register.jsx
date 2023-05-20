@@ -8,6 +8,7 @@ import {
 import { getAuth, updateProfile } from "firebase/auth";
 import { AuthContext } from "../AuthProviders/AuthProvider";
 import ThirdPartyLogin from "../Shared/ThirdPartyLogin";
+import useTitle from "../../Hooks/useTitle";
 const auth = getAuth();
 const Register = () => {
   // states and hooks
@@ -17,6 +18,7 @@ const Register = () => {
   const navigate = useNavigate();
   const navigation = useNavigation();
   const location = useLocation();
+  useTitle(" register");
   const from = location.state?.from?.pathname || "/";
 
   const handleRegister = (event) => {
