@@ -7,12 +7,12 @@ import "./Banner.css";
 import { Autoplay, Pagination, Navigation } from "swiper";
 // images
 
-import banner_1 from "../../../public/Banner/Banner_1.jpg";
-import banner_2 from "../../../public/Banner/Banner_2.jpg";
-import banner_3 from "../../../public/Banner/Banner_3.jpg";
-import banner_4 from "../../../public/Banner/Banner_4.jpg";
-import banner_5 from "../../../public/Banner/Banner_5.png";
-import banner_6 from "../../../public/Banner/Banner_6.jpg";
+import banner_1 from "/Banner/Banner_1.jpg";
+import banner_2 from "/Banner/Banner_2.jpg";
+import banner_3 from "/Banner/Banner_3.jpg";
+import banner_4 from "/Banner/Banner_4.jpg";
+import banner_5 from "/Banner/Banner_5.png";
+import banner_6 from "/Banner/Banner_6.jpg";
 
 const Banner = () => {
   const progressCircle = useRef(null);
