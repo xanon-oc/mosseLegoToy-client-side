@@ -1,19 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Lottie from "lottie-react";
 import BlogsAnimation from "../../assets/Blogs.json";
 import useTitle from "../../Hooks/useTitle";
+import AOS from "aos";
+import "aos/dist/aos.css";
 const Blogs = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []);
   useTitle(" blogs");
   return (
-    <div className="mt-8">
-      <div className="mx-auto w-96">
+    <div className="mt-8" data-aos="fade-down">
+      <div className="mx-auto w-96 ">
         <Lottie animationData={BlogsAnimation} loop={true} />
       </div>
       <h2 className="text-center text-2xl font-bold mb-8 mt-8">Blogs</h2>
 
       <div>
         {/* qna 1 */}
-        <div>
+        <div data-aos="fade-down">
           <section>
             <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
               <div className="max-w-3xl">
@@ -75,7 +80,7 @@ const Blogs = () => {
           </section>
         </div>
         {/* qna 2 */}
-        <div>
+        <div data-aos="fade-right">
           <section>
             <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
               <div className="max-w-3xl">
@@ -120,7 +125,7 @@ const Blogs = () => {
           </section>
         </div>
         {/* qna 3 */}
-        <div>
+        <div data-aos="fade-left">
           <section>
             <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
               <div className="max-w-3xl">
@@ -169,7 +174,7 @@ const Blogs = () => {
           </section>
         </div>
         {/* qna 4 */}
-        <div>
+        <div data-aos="fade-down">
           <section>
             <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
               <div className="max-w-3xl">

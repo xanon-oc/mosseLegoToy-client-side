@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../Shared/Navbar";
 import { Outlet, useNavigation } from "react-router-dom";
 import Footer from "../Shared/Footer";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 const Main = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []);
   const navigation = useNavigation();
   return (
     <div className="">
@@ -23,7 +27,9 @@ const Main = () => {
         )}
       </div>
       <div className="divider w-[90%] mt-8 mb-8 mx-auto"></div>
-      <Footer />
+      <div data-aos="zoom-in-down">
+        <Footer />
+      </div>
     </div>
   );
 };

@@ -4,6 +4,8 @@ import TableRow from "../Home/TableRow";
 import logo from "/moose.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import useTitle from "../../Hooks/useTitle";
+import AOS from "aos";
+import "aos/dist/aos.css";
 const AllToys = () => {
   const [allData, setAllData] = useState([]);
   const [singleData, setSingleData] = useState([]);
@@ -16,13 +18,13 @@ const AllToys = () => {
     return navigate("/login");
   };
   useEffect(() => {
-    fetch(`http://localhost:5000/all-products/""`)
+    fetch(`https://moose-lego-toys-server.vercel.app/all-products/""`)
       .then((res) => res.json())
       .then((data) => setAllData(data));
   }, []);
   const handleSingleItem = (id) => {
     console.log(id);
-    fetch(`http://localhost:5000/single-product/${id}`, {
+    fetch(`https://moose-lego-toys-server.vercel.app/single-product/${id}`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -32,15 +34,18 @@ const AllToys = () => {
       .then((data) => setSingleData(data));
   };
   const handleSearch = (e) => {
-    fetch(`http://localhost:5000/search/${searchValue}`)
+    fetch(`https://moose-lego-toys-server.vercel.app/search/${searchValue}`)
       .then((res) => res.json())
       .then((data) => {
         setAllData(data);
         console.log(data);
       });
   };
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
-    <div>
+    <div data-aos="fade-down">
       <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
         <img
           alt="Night"

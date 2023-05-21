@@ -7,6 +7,8 @@ import NoData from "../../assets/NoData.json";
 import { useNavigation } from "react-router-dom";
 import Swal from "sweetalert2";
 import useTitle from "../../Hooks/useTitle";
+import AOS from "aos";
+import "aos/dist/aos.css";
 const MyToys = () => {
   const { user } = useContext(AuthContext);
   const [specificData, setSpecificData] = useState([]);
@@ -14,7 +16,7 @@ const MyToys = () => {
   useTitle(" my toys");
   useEffect(() => {
     fetch(
-      `http://localhost:5000/user-products?email=${user?.email}&sort=${filterPrice}`
+      `https://moose-lego-toys-server.vercel.app/user-products?email=${user?.email}&sort=${filterPrice}`
     )
       .then((res) => res.json())
       .then((data) => {
@@ -34,7 +36,7 @@ const MyToys = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/deleteProduct/${id}`, {
+        fetch(`https://moose-lego-toys-server.vercel.app/deleteProduct/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -53,12 +55,18 @@ const MyToys = () => {
     setFilterPrice(tabName);
     console.log(tabName);
   };
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
-    <div>
+    <div data-aos="fade-down">
       <div>
         {!specificData.length == 0 ? (
           <div>
-            <section className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6">
+            <section
+              data-aos="ease-in"
+              className="relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6"
+            >
               <img
                 alt="Night"
                 src="https://images.unsplash.com/photo-1617195737496-bc30194e3a19?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
@@ -99,30 +107,12 @@ const MyToys = () => {
               </p>
             </div>
             <div className="mt-8 flex justify-center gap-4">
-              <button
-                className="btn btn-circle"
-                onClick={() => handleClick("-1")}
-              >
-                D
+              <button className="button-view" onClick={() => handleClick("1")}>
+                Descending
               </button>
-              <button
-                className="btn btn-circle"
-                onClick={() => handleClick("1")}
-              >
-                A
+              <button className="button-view" onClick={() => handleClick("-1")}>
+                Ascending
               </button>
-
-              {/* <select className="select w-full max-w-xs">
-                <option disabled selected>
-                  Pick your sort system
-                </option>
-                <option onClick={() => handleClick("-1")}>
-                  Sort by descending price{" "}
-                </option>
-                <option onClick={() => handleClick("1")}>
-                  Sort by ascending price
-                </option>
-              </select> */}
             </div>
             <div className="overflow-x-auto shadow-xl w-10/12 mx-auto mt-10">
               <table className="table w-full">

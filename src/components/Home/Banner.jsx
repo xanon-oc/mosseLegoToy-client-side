@@ -13,6 +13,7 @@ import banner_3 from "/Banner/Banner_3.jpg";
 import banner_4 from "/Banner/Banner_4.jpg";
 import banner_5 from "/Banner/Banner_5.png";
 import banner_6 from "/Banner/Banner_6.jpg";
+import banner_7 from "/Banner/Banner_7.jpg";
 
 const Banner = () => {
   const progressCircle = useRef(null);
@@ -25,6 +26,7 @@ const Banner = () => {
     <div className="relative">
       <div className="">
         <Swiper
+          navigation={true}
           spaceBetween={30}
           centeredSlides={true}
           autoplay={{
@@ -34,7 +36,7 @@ const Banner = () => {
           pagination={{
             clickable: true,
           }}
-          modules={[Autoplay, Pagination]}
+          modules={[Autoplay, Pagination, Navigation]}
           onAutoplayTimeLeft={onAutoplayTimeLeft}
           className="mySwiper h-[39.5rem]"
         >
@@ -45,16 +47,19 @@ const Banner = () => {
             <img className="object-cover " src={banner_2} alt="" />
           </SwiperSlide>
           <SwiperSlide>
-            <img className="object-cover " src={banner_3} alt="" />
+            <img className="object-cover object-top " src={banner_3} alt="" />
           </SwiperSlide>
           <SwiperSlide>
             <img className="object-cover " src={banner_4} alt="" />
           </SwiperSlide>
           <SwiperSlide>
-            <img className="object-cover" src={banner_5} alt="" />
+            <img className="object-cover object-top" src={banner_5} alt="" />
           </SwiperSlide>
           <SwiperSlide>
             <img className="object-cover " src={banner_6} alt="" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img className="object-cover " src={banner_7} alt="" />
           </SwiperSlide>
           <div className="autoplay-progress" slot="container-end">
             <svg viewBox="0 0 48 48" ref={progressCircle}>
@@ -65,9 +70,9 @@ const Banner = () => {
         </Swiper>
       </div>
       <div className="absolute bottom-0 bg-gradient-to-r from-[#151515] to-[rgba(45, 25, 41, 0)]  flex items-center h-full gap-5  left-0  bottom-0  z-40 text-white">
-        <div className="ml-[15%] mt-[100%]">
-          <h1 className="text-4xl">One Box Toy</h1>
-          <p className="text-xl">Flat 10% Off On Order Above $29.99</p>
+        <div className="ml-[15%] mt-[50%]">
+          <h1 className="text-7xl mb-2">One BoxToy</h1>
+          <p className="text-xl mt-8">Flat 10% Off On Order Above $29.99</p>
         </div>
       </div>
     </div>

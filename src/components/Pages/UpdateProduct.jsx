@@ -34,13 +34,16 @@ const UpdateProduct = () => {
     };
     console.log(updatedData);
     const notify = () => toast.success("Product update successful!");
-    fetch(`http://localhost:5000/update-product/${data._id}`, {
-      method: "PATCH",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(updatedData),
-    })
+    fetch(
+      `https://moose-lego-toys-server.vercel.app/update-product/${data._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(updatedData),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         notify();

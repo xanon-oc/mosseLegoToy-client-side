@@ -53,7 +53,9 @@ const routes = createBrowserRouter([
           </SecureRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/single-product/${params.id}`),
+          fetch(
+            `https://moose-lego-toys-server.vercel.app/single-product/${params.id}`
+          ),
       },
       {
         path: "/login",
