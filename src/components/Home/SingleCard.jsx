@@ -5,14 +5,22 @@ import icon3 from "/star.png";
 import SingleModal from "./SingleModal";
 import { AuthContext } from "../AuthProviders/AuthProvider";
 import { useNavigate } from "react-router-dom";
-
+import Swal from "sweetalert2";
 const SingleCard = ({ data, handleSingleItem, singleData }) => {
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const { _id, pictureURL, name, subCategory, price, rating, quantity } = data;
+
   const handleNavigate = () => {
-    return navigate("/login");
+    Swal.fire({ title: "To view details you have to login first !" }).then(
+      (result) => {
+        if (!user?.email) {
+          navigate("/login");
+        }
+      }
+    );
   };
+
   return (
     <div className="block border-[1px] rounded-lg p-4 shadow-sm shadow-indigo-100">
       <img

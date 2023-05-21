@@ -2,13 +2,11 @@ import { useEffect, useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import SingleCard from "./SingleCard";
-import { useNavigation } from "react-router-dom";
 const TabSys = () => {
   const [allData, setAllData] = useState([]);
   const [singleData, setSingleData] = useState([]);
   const [activeTab, setActiveTab] = useState("Home");
   const [searchValue, setSearchValue] = useState("");
-  const navigation = useNavigation();
   useEffect(() => {
     fetch(`https://moose-lego-toys-server.vercel.app/all-products/${activeTab}`)
       .then((res) => res.json())
