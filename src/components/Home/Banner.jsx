@@ -28,14 +28,13 @@ const Banner = () => {
           spaceBetween={30}
           centeredSlides={true}
           autoplay={{
-            delay: 2500,
+            delay: 4500,
             disableOnInteraction: false,
           }}
           pagination={{
             clickable: true,
           }}
-          navigation={true}
-          modules={[Autoplay, Pagination, Navigation]}
+          modules={[Autoplay, Pagination]}
           onAutoplayTimeLeft={onAutoplayTimeLeft}
           className="mySwiper h-[39.5rem]"
         >

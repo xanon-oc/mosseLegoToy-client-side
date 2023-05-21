@@ -10,13 +10,13 @@ const TabSys = () => {
   const [searchValue, setSearchValue] = useState("");
   const navigation = useNavigation();
   useEffect(() => {
-    fetch(`https://moose-lego-toys-server.vercel.app/all-products/${activeTab}`)
+    fetch(`http://localhost:5000/all-products/${activeTab}`)
       .then((res) => res.json())
       .then((data) => setAllData(data));
   }, [activeTab]);
   const handleSingleItem = (id) => {
     console.log(id);
-    fetch(`https://moose-lego-toys-server.vercel.app/single-product/${id}`, {
+    fetch(`http://localhost:5000/single-product/${id}`, {
       method: "GET",
       headers: {
         "content-type": "application/json",
@@ -30,7 +30,7 @@ const TabSys = () => {
     console.log(tabName);
   };
   const handleSearch = (e) => {
-    fetch(`https://moose-lego-toys-server.vercel.app/search/${searchValue}`)
+    fetch(`http://localhost:5000/search/${searchValue}`)
       .then((res) => res.json())
       .then((data) => {
         setAllData(data);
