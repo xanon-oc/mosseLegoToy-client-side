@@ -7,6 +7,8 @@ import Reviews from "../Home/Reviews";
 import Subscribe from "../Home/Subscribe";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Offer from "../Home/Offer";
+import AppStore from "../Home/AppStore";
 const Home = () => {
   useEffect(() => {
     AOS.init();
@@ -14,8 +16,11 @@ const Home = () => {
   useTitle(" Home");
   return (
     <div className="">
-      <div className="mt-2" data-aos="zoom-in-down">
+      <div className="" data-aos="zoom-in-down">
         <Banner />
+      </div>
+      <div data-aos="fade-up" className="mt-6">
+        <Offer />
       </div>
       <div data-aos="fade-up">
         <TabSys />
@@ -26,6 +31,9 @@ const Home = () => {
       </div>
       <div data-aos="fade-up">
         <Subscribe />
+      </div>
+      <div data-aos="fade-up">
+        <AppStore />
       </div>
     </div>
   );
